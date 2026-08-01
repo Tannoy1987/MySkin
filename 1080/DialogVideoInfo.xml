@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol always="true">8</defaultcontrol>
+	<onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
+	<onunload>ClearProperty(infobackground,home)</onunload>
+	<controls>
+		<include>DA</include>
+		<include>background</include>
+		<include>fanart</include>
+		<include>tv</include>
+		<include>crt</include>
+		<include>black</include>
+		<!--<include>test</include>  -->
+		<!--Header-->
+		<control type="group">
+			<centertop>50%</centertop>
+			<height>1080</height>
+			<centerleft>50%</centerleft>
+			<width>1920</width>
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="Window.IsVisible(script-embuary-video.xml) | Window.IsVisible(script-embuary-person.xml) | Window.IsVisible(script-embuary-image.xml)">Conditional</animation>
+		<!--Headers-->
+			<control type="group">
+				<top>10</top>
+				<right>10</right>
+				<bottom>10</bottom>
+				<left>388</left>
+				<include>bg</include>
+				<control type="label" id="3332">
+					<left>20</left>
+					<top>15</top>
+					<label>$VAR[VideoInfoMainLabelVar2]</label>
+					<font>reg29</font>
+					<textcolor>grey</textcolor>
+					<shadowcolor>text_shadow</shadowcolor>
+					<height>30</height>
+					<width>auto</width>
+					<visible>String.IsEqual(ListItem.DBType,episode) + !Control.HasFocus(50)</visible>
+				</control> 
+				<control type="textbox" id="3333">
+					<centertop>49%</centertop>
+					<left>50</left>	
+					<label>$VAR[VideoInfoMainLabelVar2]</label>
+					<font>bold55</font>
+					<shadowcolor>text_shadow</shadowcolor>
+					<height>140</height>
+					<right>40</right>
+					<aligny>center</aligny>
+					<align>left</align>
+					<visible>!String.IsEqual(ListItem.DBType,episode)</visible>
+				</control> 
+				<control type="textbox" id="3334">
+					<left>40</left>
+					<top>430</top>	
+					<label>$VAR[VideoInfoSubLabelVar]</label>
+					<font>bold50</font>
+					<shadowcolor>text_shadow</shadowcolor>
+					<height>140</height>
+					<right>40</right>
+					<aligny>center</aligny>
+					<align>left</align>
+					<visible>String.IsEqual(ListItem.DBType,episode)</visible>
+				</control> 
+				<control type="grouplist" id="4000">
+					<top>540</top>
+					<left>0</left>
+					<right>0</right>
+					<height>180</height>
+					<itemgap>20</itemgap>
+					<ondown>138</ondown>
+					<onup>50</onup>
+					<onright>40000</onright>
+					<onleft>5000</onleft>
+					<align>center</align>
+				<!-- <orientation>horizontal</orientation> -->
+					<include content="InfoDialogMetadata">
+						<param name="control_id" value="147" />
+						<param name="label" value="$INFO[ListItem.Director,[COLOR button_focus]$LOCALIZE[20339]: [/COLOR]]" />
+						<param name="altlabel" value="$INFO[ListItem.Director,$LOCALIZE[20339]: ]" />
+						<param name="onclick_condition" value="System.AddonIsEnabled(script.embuary.info)" />
+						<param name="onclick" value="RunScript(script.embuary.info,call=person,query='$ESCINFO[ListItem.Director]')" />
+						<param name="altclick_condition" value="System.AddonIsEnabled(script.embuary.info)" />
+						<param name="altclick" value="RunScript(script.embuary.info,call=person,query='$ESCINFO[ListItem.Director]')" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Director)" />
+					</include>
+					<include content="InfoDialogMetadata">
+						<param name="control_id" value="148" />
+						<param name="label" value="$INFO[ListItem.Writer,[COLOR button_focus]$LOCALIZE[20417]: [/COLOR]]" />
+						<param name="altlabel" value="$INFO[ListItem.Writer,$LOCALIZE[20417]: ]" />
+						<param name="onclick_condition" value="System.AddonIsEnabled(script.embuary.info)" />
+						<param name="onclick" value="RunScript(script.embuary.info,call=person,query='$ESCINFO[ListItem.Writer]')" />
+						<param name="altclick_condition" value="System.AddonIsEnabled(script.embuary.info)" />
+						<param name="altclick" value="RunScript(script.embuary.info,call=person,query='$ESCINFO[ListItem.Writer]')" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Writer)" />
+					<include content="InfoDialogMetadata">
+						<param name="control_id" value="158" />
+						<param name="label" value="[COLOR button_focus]$LOCALIZE[20457]: [/COLOR]$INFO[ListItem.Set]" />
+						<param name="altlabel" value="$LOCALIZE[20457]: $INFO[ListItem.Set]" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Set)" />
+					</include>
+					</include>
+				</control>
+				<!--Genre-->	
+					<control type="label" id="3333">
+					<bottom>15</bottom>
+					<right>20</right>
+					<label>$INFO[ListItem.Genre]</label>
+					<font>reg32</font>
+					<shadowcolor>text_shadow</shadowcolor>
+					<height>40</height>
+					<align>right</align>
+					<width>960</width>
+					</control> 
+				<!--Discription-->
+					<control type="group">
+						<left>0</left>
+						<top>720</top>
+						<right>0</right>
+						<height>264</height>
+						<control type="button" id="138">
+							<left>5</left>	
+							<top>6</top>								
+							<width>1511</width>
+							<height>264</height>
+							<textoffsetx>40</textoffsetx>
+							<textoffsety>20</textoffsety>
+							<aligny>bottom</aligny>
+							<label></label>
+							<onclick condition="!String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
+							<onclick condition="!String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
+							<onclick condition="!String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
+							<onup>50</onup>
+							<onleft>8</onleft>
+							<onright>8</onright>
+							<ondown>50</ondown>
+							<visible>Integer.IsGreater(Container(4000).NumItems,0)</visible>
+							<texturenofocus />
+						</control>
+						<control type="button" id="139">
+							<left>5</left>	
+							<top>6</top>								
+							<width>1511</width>
+							<height>264</height>
+							<textoffsetx>40</textoffsetx>
+							<textoffsety>20</textoffsety>
+							<aligny>bottom</aligny>
+							<label></label>
+							<onclick condition="!String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Header,$LOCALIZE[207],home)</onclick>
+							<onclick condition="!String.IsEmpty(ListItem.Plot)">SetProperty(TextViewer_Text,$ESCINFO[ListItem.Plot],home)</onclick>
+							<onclick condition="!String.IsEmpty(ListItem.Plot)">ActivateWindow(1102)</onclick>
+							<onup>50</onup>
+							<onleft>8</onleft>
+							<onright>8</onright>
+							<ondown>50</ondown>
+							<visible>!Integer.IsGreater(Container(4000).NumItems,0)</visible>
+							<texturenofocus />
+						</control>
+						<control type="image">
+							<right>0</right>
+							<top>0</top>
+							<left>0</left>
+							<height>276</height>
+							<texture border="5">boxes/inner.png</texture>
+						</control>
+						<control type="textbox">
+							<left>30</left>
+							<top>10</top>
+							<right>30</right>
+							<bottom>10</bottom>
+							<label fallback="19055">$INFO[ListItem.Plot]</label>
+							<autoscroll delay="10000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
+							<visible>Integer.IsGreater(Container(4000).NumItems,0)</visible>
+							<align>center</align>
+							<aligny>center</aligny>
+						</control>
+						<control type="textbox">
+							<left>30</left>
+							<top>10</top>
+							<right>30</right>
+							<bottom>10</bottom>
+							<label fallback="19055">$INFO[ListItem.Plot]</label>
+							<autoscroll delay="10000" time="5000" repeat="10000">Skin.HasSetting(AutoScroll)</autoscroll>
+							<visible>!Integer.IsGreater(Container(4000).NumItems,0)</visible>
+							<align>center</align>
+							<aligny>center</aligny>
+						</control>
+					</control>
+				</control>
+				<include content="MediaFlagsTR">
+					<param name="top" value="27" />
+					<param name="right" value="30" />
+					<param name="width" value="1280" />
+				</include>	
+			<!--Button-Panel-->
+				<control type="grouplist" id="5000">
+					<left>10</left>
+					<top>53%</top>
+					<width>368</width>
+					<height>60%</height>
+					<onleft>5000</onleft>
+					<onright>50</onright>
+					<onup>10</onup>
+					<ondown>8</ondown>
+					<itemgap>10</itemgap>
+					<align>top</align>
+					<orientation>vertical</orientation>
+					<scrolltime tween="quadratic">200</scrolltime>
+					<control type="group" id="400">
+						<top>-60</top>
+						<width>264</width>
+						<visible>Control.IsEnabled(7) | !String.IsEmpty(ListItem.UserRating)</visible>
+						<control type="button" id="7">
+							<include content="VideoInfoButtonsCommon2">
+								<param name="icon" value="" />
+							</include>
+							<label>$LOCALIZE[31033]</label>
+							<onleft>441</onleft>
+							<onright>50</onright>
+							<onup>140</onup>
+							<enable>String.IsEmpty(Container.PluginName) + !Container.Content(Sets)</enable>
+							<ondown>8</ondown>
+							<onup>6</onup>
+						</control>
+						<control type="label">
+							<label>$INFO[ListItem.UserRating]</label>
+							<font>font45_title</font>
+							<left>190</left>
+							<top>10</top>
+							<width>264</width>
+							<align>center</align>
+							<visible>!Control.HasFocus(7)</visible>
+						</control>
+						<control type="label">
+							<label>$INFO[ListItem.UserRating]</label>
+							<textcolor>black</textcolor>
+							<font>font45_title</font>
+							<left>190</left>
+							<top>10</top>
+							<width>264</width>
+							<align>center</align>
+							<visible>Control.HasFocus(7)</visible>
+						</control>
+						<control type="image">
+							<texture colordiffuse="black">icons/infodialogs/rating.png</texture>
+							<left>10</left>
+							<top>6</top>
+							<width>48</width>
+							<height>48</height>
+							<align>center</align>
+							<visible>Control.HasFocus(7)</visible>
+						</control>
+						<control type="image">
+							<texture>icons/infodialogs/rating.png</texture>
+							<left>10</left>
+							<top>6</top>
+							<width>48</width>
+							<height>48</height>
+							<align>center</align>
+							<visible>!Control.HasFocus(7)</visible>
+						</control>
+					</control>
+					<include content="InfoDialogToggleButton2">
+						<param name="id" value="8" />
+						<param name="icon_on" value="icons/filemanager.png" />
+						<param name="icon_off" value="icons/infodialogs/play.png" />
+						<param name="selected" value="String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set)" />
+						<param name="label" value="$VAR[VideoInfoPlayButtonLabelVar]" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="11" />
+						<param name="icon" value="icons/infodialogs/trailer.png" />
+						<param name="label" value="$LOCALIZE[20410]" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Trailer) + ![String.StartsWith(Container.FolderPath,plugin://) + String.Contains(Container.FolderPath,trailer)]" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="441" />
+						<param name="icon" value="icons/infodialogs/cinema.png" />
+						<param name="onclick_1" value="Dialog.Close(MovieInformation)" />
+						<param name="onclick_2" value="RunScript(script.cinemavision,experience)" />
+						<param name="label" value="$LOCALIZE[31003]" />
+						<param name="visible" value="System.AddonIsEnabled(script.cinemavision) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="101" />
+						<param name="icon" value="icons/infodialogs/info.png" />
+						<param name="label" value="$LOCALIZE[31034]" />
+						<param name="onclick_1_condition" value="!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,movie)" />
+						<param name="onclick_1" value="RunScript(script.embuary.info,call=movie,dbid=$INFO[ListItem.DBID])" />
+						<param name="onclick_2_condition" value="!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,tvshow)" />
+						<param name="onclick_2" value="RunScript(script.embuary.info,call=tv,dbid=$INFO[ListItem.DBID])" />
+						<param name="onclick_3_condition" value="!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,episode)" />
+						<param name="onclick_3" value="RunScript(script.embuary.info,call=tv,query='$ESCINFO[ListItem.TVShowTitle]',year=$INFO[ListItem.Year])" />
+						<param name="visible" value="System.AddonIsEnabled(script.embuary.info) + !String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DbType,movie) | String.IsEqual(ListItem.DbType,tvshow) | String.IsEqual(ListItem.DbType,episode)]" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="102" />
+						<param name="icon" value="icons/infodialogs/image.png" />
+						<param name="label" value="$LOCALIZE[31028]" />
+						<param name="onclick_1" value="SetProperty(fanart,$ESCINFO[ListItem.Art(fanart)],home)" />
+						<param name="onclick_2" value="ActivateWindow(1104)" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Art(fanart))" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="13" />
+						<param name="icon" value="icons/infodialogs/director.png" />
+						<param name="label" value="$LOCALIZE[31123]" />
+						<param name="visible" value="!String.IsEmpty(ListItem.Director)" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="999" />
+						<param name="icon" value="DefaultMusicAlbums.png" />
+						<param name="onclick_1" value="Dialog.Close(all,true)" />
+						<param name="onclick_2" value="ActivateWindow(Music,musicdb://albums/?artist=$INFO[ListItem.Artist]&amp;albumartistonly=true&amp;compilation=false)" />
+						<param name="label" value="$LOCALIZE[132]" />
+						<param name="visible" value="String.IsEqual(ListItem.DBType,musicvideo)" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="14" />
+						<param name="icon" value="icons/infodialogs/versions.png" />
+						<param name="label" value="$LOCALIZE[40000]" />
+						<param name="visible" value="String.IsEqual(ListItem.DBType,movie)" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="15" />
+						<param name="icon" value="icons/infodialogs/extras.png" />
+						<param name="label" value="$LOCALIZE[40211]" />
+						<param name="visible" value="String.IsEqual(ListItem.DBType,movie)" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="443" />
+						<param name="icon" value="icons/infodialogs/set.png" />
+						<param name="label" value="$LOCALIZE[20457]" />
+						<param name="onclick_1" value="Dialog.Close(all,true)" />
+						<param name="onclick_2" value="ActivateWindow(Videos,videodb://movies/sets/$INFO[ListItem.SetId]/?setid=$INFO[ListItem.SetId])" />
+						<param name="visible" value="!String.IsEmpty(ListItem.SetID)" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="10" />
+						<param name="icon" value="icons/infodialogs/choose_image.png" />
+						<param name="label" value="$LOCALIZE[13511]" />
+						<param name="visible" value="Control.IsEnabled(10)" />
+					</include>
+					<include content="InfoDialogButton2">
+						<param name="id" value="6" />
+						<param name="icon" value="icons/infodialogs/update.png" />
+						<param name="label" value="$LOCALIZE[184]" />
+						<param name="visible" value="Control.IsEnabled(6)" />
+					</include>
+				</control>
+		<!--Actor-Panel-->
+			<control type="group">
+				<include>OpenClose_Right</include>
+				<left>390</left>
+				<top>50</top>
+				<control type="group">
+					<visible>Integer.IsEqual(Container(50).NumItems,0) + String.IsEmpty(ListItem.Art(tvshow.banner)) + String.IsEmpty(ListItem.Art(banner))</visible>
+					<control type="image">
+						<left>0</left>
+						<top>164</top>
+						<width>1245</width>
+						<height>328</height>
+						<texture border="21">dialogs/dialog-bg.png</texture>
+					</control>
+					<control type="textbox">
+						<left>17</left>
+						<top>185</top>
+						<width>1210</width>
+						<height>283</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font36_title</font>
+						<label>$LOCALIZE[31079]</label>
+					</control>
+				</control>
+				<control type="panel" id="50">
+					<left>15</left>
+					<top>0</top>
+					<width>1480</width>
+					<height>370</height>
+					<onup condition="System.AddonIsEnabled(script.embuary.info) + Control.HasFocus(50) + !String.IsEqual(ListItem.DBType,set)">RunScript(script.embuary.info,call=person,query='$ESCINFO[Container(50).ListItem.Label]')</onup>
+					<onup condition="System.HasAddon(script.embuary.info) + !System.AddonIsEnabled(script.embuary.info) + !String.IsEqual(ListItem.DBType,set)">EnableAddon(script.embuary.info)</onup>
+					<onup condition="!System.HasAddon(script.embuary.info) + !String.IsEqual(ListItem.DBType,set)">InstallAddon(script.embuary.info)</onup>
+					<onleft>50</onleft>
+					<onright>50</onright>
+					<ondown>138</ondown>
+					<scrolltime>200</scrolltime>
+					<orientation>horizontal</orientation>
+					<itemlayout height="317" width="245" condition="!Container.Content(Sets)">
+						<control type="group">
+							<top>10</top>
+							<control type="image">
+								<top>0</top>
+								<width>264</width>
+								<height>317</height>
+								<texture>DefaultActorSolid.png</texture>
+								<aspectratio aligny="center">scale</aspectratio>
+								<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+								<bordersize>20</bordersize>
+							</control>
+							<control type="image">
+								<top>20</top>
+								<left>20</left>
+								<width>224</width>
+								<height>277</height>
+								<texture background="true">$INFO[ListItem.Thumb]</texture>
+								<aspectratio aligny="center">scale</aspectratio>
+							</control>
+							<control type="image">
+								<left>20</left>
+								<width>224</width>
+								<height>80</height>
+								<bottom>10</bottom>
+								<texture>overlays/overlayfade.png</texture>
+								<animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
+							</control>
+<control type="group">
+						                    <animation effect="slide" end="0,66" time="0" condition="true">conditional</animation>
+
+							<control type="label">
+								<left>25</left>
+								<width>214</width>
+								<height>67</height>
+								<top>218</top>
+								<align>center</align>
+								<aligny>center</aligny>
+								<font>font12</font>
+								<label>$INFO[ListItem.Label]</label>
+							</control>
+							<control type="label">
+								<left>25</left>
+								<width>214</width>
+								<height>67</height>
+								<top>245</top>
+								<align>center</align>
+								<aligny>center</aligny>
+								<font>font12</font>
+								<textcolor>grey</textcolor>
+								<label>$INFO[ListItem.Label2]</label>
+							</control>
+							</control>
+						</control>
+					</itemlayout>
+					<focusedlayout height="317" width="245" condition="!Container.Content(Sets)">
+						<control type="group">
+							<left>0</left>
+							<top>10</top>
+							<control type="image">
+								<top>0</top>
+								<width>264</width>
+								<height>317</height>
+								<texture>DefaultActorSolid.png</texture>
+								<aspectratio aligny="center">scale</aspectratio>
+								<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+								<bordersize>20</bordersize>
+							</control>
+							<control type="image">
+								<top>20</top>
+								<left>20</left>
+								<width>224</width>
+								<height>277</height>
+								<texture background="true">$INFO[ListItem.Thumb]</texture>
+								<aspectratio aligny="center">scale</aspectratio>
+							</control>
+							<control type="image">
+								<left>20</left>
+								<width>224</width>
+								<height>80</height>
+								<bottom>10</bottom>
+								<texture>overlays/overlayfade.png</texture>
+								<animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
+							</control>
+<control type="group">
+						                    <animation effect="slide" end="0,66" time="0" condition="true">conditional</animation>
+							<control type="label">
+								<left>25</left>
+								<width>214</width>
+								<height>67</height>
+								<top>218</top>
+								<align>center</align>
+								<aligny>center</aligny>
+								<font>font12</font>
+								<scroll>true</scroll>
+								<label>$INFO[ListItem.Label]</label>
+							</control>
+							<control type="label">
+								<left>25</left>
+								<width>214</width>
+								<height>67</height>
+								<top>245</top>
+								<align>center</align>
+								<aligny>center</aligny>
+								<font>font12</font>
+								<textcolor>grey</textcolor>
+								<scroll>true</scroll>
+								<label>$INFO[ListItem.Label2]</label>
+							</control>
+</control>
+							<control type="image">
+								<left>16</left>
+								<top>16</top>
+								<width>232</width>
+								<height>285</height>
+								<texture border="4" infill="false" colordiffuse="button_focus">colors/white.png</texture>
+							</control>
+						</control>
+					</focusedlayout>
+					<itemlayout height="319" width="205" condition="Container.Content(Sets)">
+						<control type="group">
+							<left>0</left>
+							<top>10</top>
+							<control type="image">
+								<top>0</top>
+								<width>226</width>
+								<height>319</height>
+								<texture>DefaultMovies.png</texture>
+								<aspectratio aligny="center">scale</aspectratio>
+								<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+								<bordersize>20</bordersize>
+							</control>
+							<control type="image">
+								<top>20</top>
+								<left>20</left>
+								<width>186</width>
+								<height>279</height>
+								<texture background="true">$INFO[ListItem.Art(poster)]</texture>
+								<aspectratio aligny="center">scale</aspectratio>
+							</control>
+							<control type="image">
+								<left>20</left>
+								<width>186</width>
+								<height>180</height>
+								<bottom>10</bottom>
+								<texture>overlays/overlayfade.png</texture>
+								<animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
+								<visible>String.IsEmpty(ListItem.Art(poster))</visible>
+							</control>
+							<control type="textbox">
+								<left>25</left>
+								<width>166</width>
+								<height>84</height>
+								<top>210</top>
+								<align>center</align>
+								<aligny>center</aligny>
+								<font>font23_narrow</font>
+								<label>$INFO[ListItem.Label]</label>
+								<visible>String.IsEmpty(ListItem.Art(poster))</visible>
+							</control>
+						</control>
+					</itemlayout>
+					<focusedlayout height="319" width="205" condition="Container.Content(Sets)">
+						<control type="group">
+							<left>0</left>
+							<top>10</top>
+							<control type="image">
+								<top>0</top>
+								<width>226</width>
+								<height>319</height>
+								<texture>DefaultMovies.png</texture>
+								<aspectratio aligny="center">scale</aspectratio>
+								<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+								<bordersize>20</bordersize>
+							</control>
+							<control type="image">
+								<top>20</top>
+								<left>20</left>
+								<width>186</width>
+								<height>279</height>
+								<texture background="true">$INFO[ListItem.Art(poster)]</texture>
+								<aspectratio aligny="center">scale</aspectratio>
+							</control>
+							<control type="image">
+								<left>20</left>
+								<width>186</width>
+								<height>180</height>
+								<bottom>10</bottom>
+								<texture>overlays/overlayfade.png</texture>
+								<animation effect="fade" start="100" end="80" time="0" condition="true">Conditional</animation>
+								<visible>String.IsEmpty(ListItem.Art(poster))</visible>
+							</control>
+							<control type="textbox">
+								<left>25</left>
+								<width>166</width>
+								<height>84</height>
+								<top>210</top>
+								<align>center</align>
+								<aligny>center</aligny>
+								<font>font23_narrow</font>
+								<label>$INFO[ListItem.Label]</label>
+								<visible>String.IsEmpty(ListItem.Art(poster))</visible>
+							</control>
+							<control type="image">
+								<left>16</left>
+								<top>16</top>
+								<width>194</width>
+								<height>287</height>
+								<texture border="4" infill="false" colordiffuse="button_focus">colors/white.png</texture>
+							</control>
+						</control>
+					</focusedlayout>
+				</control>
+				<include content="LeftRightArrows">
+					<param name="list_id" value="50" />
+					<param name="left_posx" value="-12" />
+					<param name="right_posx" value="1500" />
+					<param name="posy" value="155" />
+					<param name="visible" value="true" />
+				</include>
+			</control>	
+		
+			<control type="group">
+				<top>10</top>
+				<left>10</left>
+				<include>OpenClose_Left</include>
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>368</width>
+					<height>552</height>
+					<texture>colors/black.png</texture>
+					<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+					<bordersize>20</bordersize>
+				</control>
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>368</width>
+					<height>552</height>
+					<aspectratio>scale</aspectratio>
+					<texture diffuse="diffuse/bigposter.png" fallback="DefaultVideo.png" background="true">$VAR[InfoDialogPosterVar]</texture>
+				</control>
+			</control>
+			<control type="group">
+				<bottom>18</bottom>
+				<left>70</left>
+				<visible>String.IsEqual(ListItem.DBType,musicvideo) + !Skin.HasSetting(show_musicvideoposter)</visible>
+				<include>OpenClose_Left</include>
+				<control type="image">
+					<width>290</width>
+					<height>395</height>
+					<aspectratio>stretch</aspectratio>
+					<texture colordiffuse="FF555555">DefaultVideo.png</texture>
+				</control>
+				<control type="image">
+					<left>10</left>
+					<width>290</width>
+					<height>395</height>
+					<aspectratio>keep</aspectratio>
+					<texture>$INFO[ListItem.Thumb]</texture>
+					<bordertexture border="21" infill="false">overlays/shadow.png</bordertexture>
+					<bordersize>20</bordersize>
+				</control>
+			</control>
+			<control type="label">
+				<right>80</right>
+				<top>70</top>
+				<align>right</align>
+				<width>1400</width>
+				<height>44</height>
+				<font>font20_title</font>
+				<textcolor>99FFFFFF</textcolor>
+				<shadowcolor>text_shadow</shadowcolor>
+				<haspath>true</haspath>
+				<label>$VAR[VideoInfoBottomLabelVar]</label>
+				<visible>Control.HasFocus(6)</visible>
+				<animation effect="fade" start="0" end="100" time="300" delay="300">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+				<animation effect="fade" start="0" end="100" time="300">Visible</animation>
+				<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+			</control>
+
+		</control>
+		<control type="group">
+			<animation effect="fade" start="0" end="100" time="300" delay="300">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="Window.IsVisible(script-embuary-video.xml) | Window.IsVisible(script-embuary-person.xml) | Window.IsVisible(script-embuary-image.xml)">Conditional</animation>
+			<centerleft>50%</centerleft>
+			<width>1920</width>
+			<bottom>10</bottom>
+			<include>MediaFlags</include>
+			<control type="group">
+				<visible>Control.HasFocus(50) + !String.IsEqual(ListItem.DBType,set)</visible>
+				<animation effect="fade" time="200">VisibleChange</animation>
+				<top>20</top>
+				<left>410</left>
+				<control type="image">
+<top>-20</top>
+<left>20</left>
+					<width>36</width>
+					<height>36</height>
+					<animation effect="rotate" end="-90" center="36,19" time="0" condition="true">Conditional</animation>
+					<texture colordiffuse="grey">frame/menu-nofo.png</texture>
+				</control>
+				<control type="label">
+
+					<left>90</left>
+					<width>500</width>
+					<height>44</height>
+					<shadowcolor>text_shadow</shadowcolor>
+					<label>$LOCALIZE[31125]</label>
+				</control>
+			</control>
+			<control type="group">
+				<visible>Control.HasFocus(138) | Control.HasFocus(139)</visible>
+				<animation effect="fade" time="200">VisibleChange</animation>
+				<top>1020</top>
+				<left>320</left>
+				<control type="image">
+					<top>4</top>
+					<left>17</left>
+					<width>36</width>
+					<height>36</height>
+					<texture colordiffuse="grey">lists/played-total.png</texture>
+				</control>
+				<control type="label">
+					<left>74</left>
+					<width>800</width>
+					<height>44</height>
+					<shadowcolor>text_shadow</shadowcolor>
+					<label>$LOCALIZE[31126]</label>
+				</control>
+			</control>
+
+
+		</control>
+
+
+
+	</controls>
+</window>

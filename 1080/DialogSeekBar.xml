@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<visible>Window.IsActive(fullscreenvideo)</visible>
+	<visible>![Window.IsActive(sliderdialog) | Window.IsActive(pvrosdchannels) |
+		Window.IsActive(pvrchannelguide) | Window.IsActive(pvrguideinfo) | Window.IsActive(1110)]</visible>
+	<visible>Player.Seeking | Player.HasPerformedSeek(3) | [Player.Paused + !Player.Caching] |
+		Player.Forwarding | Player.Rewinding | Player.ShowInfo | Window.IsActive(fullscreeninfo) |
+		Player.ShowTime | Window.IsActive(videoosd) | Window.IsActive(musicosd) |
+		Window.IsActive(playerprocessinfo) | !String.IsEmpty(Player.SeekNumeric) |
+		!String.IsEmpty(PVR.ChannelNumberInput)</visible>
+	<depth>DepthOSD</depth>
+	<zorder>2</zorder>
+	<controls>
+		<include>PVRChannelNumberInput</include>
+		<animation effect="fade" time="0">Window.IsFocus(playerprocessinfo)</animation>		
+		<control type="group">
+			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | Player.ShowTime |
+				Window.IsActive(videoosd) | Window.IsActive(musicosd) |
+				Window.IsActive(playerprocessinfo) | Window.IsActive(pvrosdchannels) |
+				Window.IsActive(pvrchannelguide) | ![!String.IsEmpty(Player.SeekNumeric) |
+				Player.Seeking | Player.HasPerformedSeek(3) | Player.Forwarding | Player.Rewinding |
+				Player.Paused] | !String.IsEmpty(PVR.ChannelNumberInput)</visible>
+			<bottom>0</bottom>
+			<height>190</height>
+<!--PVR-REC-->				
+			<control type="group">
+				<visible>!Window.IsVisible(videoosd) + !Window.IsVisible(musicosd)</visible>
+				<control type="grouplist">
+					<visible>[PVR.IsRecordingPlayingChannel + !Player.ChannelPreviewActive] |
+						PVR.IsPlayingActiveRecording</visible>
+					<left>20</left>
+					<centertop>125</centertop>
+					<height>60</height>
+					<align>left</align>
+					<orientation>horizontal</orientation>
+					<itemgap>-5</itemgap>
+					<control type="image">
+						<top>100</top>
+						<left>20</left>
+						<width>60</width>
+						<height>60</height>
+						<aligny>center</aligny>
+						<texture>osd/fullscreen/buttons/record.png</texture>
+					</control>
+					<control type="label">
+						<top>110</top>
+						<left>90</left>
+						<width>400</width>
+						<height>60</height>
+						<aligny>center</aligny>
+						<font>font25_title</font>
+						<label>[COLOR red][B]$LOCALIZE[19158][/B][/COLOR]</label>
+					</control>
+				</control>
+			</control>
+			<control type="group"> <!--LIVE-TV-->
+				<visible>!Window.IsVisible(videoosd) +
+					VideoPlayer.Content(livetv)</visible>
+					<visible>!Window.IsActive(playerprocessinfo)</visible>
+				<control type="image">
+					<top>-900</top>
+					<texture colordiffuse="button_focus">panels/videoosd.png</texture>
+				</control>
+			</control>
+<!--LIVE-TV-PROGRESS-BARS-->				
+			<control type="group">
+				<visible>VideoPlayer.Content(LiveTV)</visible> 
+<!-- pvr info size-->
+			<!-- <control type="group">
+				<visible>Player.SeekEnabled + VideoPlayer.HasEPG</visible>
+				<include content="PVRProgress2">
+					<param name="ts_bar_top" value="70%" />
+					<param name="epg_bar_top" value="78%" />
+					<param name="ts_bar_height" value="8" />
+					<param name="epg_bar_height" value="16" />
+				</include>
+			</control> -->
+			<control type="group">
+				<visible>Player.SeekEnabled + !VideoPlayer.HasEPG</visible>
+				<include content="PVRProgress2">
+					<param name="ts_bar_top" value="70%" />
+					<param name="ts_bar_height" value="10" />
+				</include>
+			</control>
+<!--Progress bar-->
+			<control type="group">  
+				<visible>!Player.SeekEnabled + VideoPlayer.HasEPG</visible>
+				<include content="PVRProgress2">
+					<param name="epg_bar_top" value="99.6%" />
+					<param name="epg_bar_height" value="3" />
+				</include>
+			</control>
+<!-- pvr progress bar-->
+			<control type="group"> 
+				<visible>!Player.SeekEnabled + !VideoPlayer.HasEPG</visible>
+				<include content="PVRProgress2" />
+			</control>
+		</control>
+<!--VIDEO-OSD-->			
+		<control type="group">
+								
+					
+			<visible>Window.IsVisible(videoosd) + Player.HasVideo + ![VideoPlayer.Content(LiveTV) | Player.ShowInfo | VideoPlayer.HasEpg | String.isempty(Player.Duration)]</visible> <!--seekbar-->
+			<bottom>31.5%</bottom>
+			<control type="group">
+				<left>18%</left>
+				<right>18%</right>
+				<height>12</height>
+				<bottom>0</bottom>
+				<control type="progress">
+					<top>-6</top>
+					<height>6</height>
+					<info>Player.ProgressCache</info>
+					<texturebg />
+					<midtexture colordiffuse="button_focus">osd/progress/cache2.png</midtexture>
+				</control>
+				<control type="progress">
+					<info>Player.Progress</info>
+					<texturebg border="6" colordiffuse="60FFFFFF">osd/progress/bar5.png</texturebg>
+					<midtexture border="6" colordiffuse="button_focus">osd/progress/bar4.png</midtexture>
+				</control>
+			</control>
+			<control type="group">
+				<left>18%</left>
+				<right>18.2%</right>
+				<height>3</height>
+				<bottom>5</bottom>
+				<control type="ranges">
+					<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+					<lefttexture>colors/white.png</lefttexture>
+					<midtexture colordiffuse="FFFF0000">colors/white.png</midtexture>
+					<righttexture>osd/I.png</righttexture>
+					<info>Player.Editlist</info>
+				</control>
+				<control type="ranges">
+					<texturebg border="3" colordiffuse="00FFFFFF">colors/red50.png</texturebg>
+					<righttexture>colors/red.png</righttexture>
+					<info>Player.Cuts</info>
+				</control>
+				<control type="ranges">
+					<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+					<righttexture>colors/white.png</righttexture>
+					<info>Player.SceneMarkers</info>
+				</control>
+				<control type="ranges">
+					<visible>Window.IsVisible(videoosd)</visible>
+					<texturebg border="3" colordiffuse="00FFFFFF">colors/white50.png</texturebg>
+					<righttexture>osd/I.png</righttexture>
+					<info>Player.Chapters</info>
+				</control>
+			</control>
+		</control>
+	</control>
+<!--LIVE-TV-OSD-->		
+	<control type="group">
+		<visible>!Window.IsVisible(playerprocessinfo)</visible>
+		<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] +
+			VideoPlayer.Content(LiveTV)</visible>
+		<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | !Player.Seeking |
+			!Player.HasPerformedSeek(3) | !Player.Forwarding | !Player.Rewinding |
+			!Player.Paused | !Window.IsActive(1101)</visible>
+		<animation effect="fade" start="0" end="100" time="300" delay="250">Visible</animation>
+		<animation effect="fade" start="100" end="0" time="100">Hidden</animation>
+		<animation effect="slide" end="0,-20" time="150" condition="VideoPlayer.Content(LiveTV)">
+			conditional</animation>
+		<bottom>0</bottom>
+		<height>380</height>
+<!--osd channel name-->			
+		<control type="label">   
+			<left>237</left>
+			<width>75%</width>
+			<top>55%</top>
+			<height>25</height>
+			<align>center</align>
+			<label>$INFO[VideoPlayer.ChannelName]</label>
+			<shadowcolor>text_shadow</shadowcolor>
+			<font>font45_title</font>
+		</control>
+<!--osd channel number-->			
+		<control type="label">  
+			<left>-52</left>
+			<width>360</width>
+			<top>69%</top>
+			<height>25</height>
+			<align>center</align>
+			<label>$INFO[VideoPlayer.ChannelNumberLabel]</label>
+			<shadowcolor>text_shadow</shadowcolor>
+			<font>font45_title</font>
+		</control>
+<!--channel logo-->
+		<control type="image"> 
+			<right>-87%</right>
+			<bottom>3.8%</bottom>
+			<height>130</height>
+			<aspectratio aligny="bottomcenter">keep</aspectratio>
+			<align>center</align>
+			<texture>$INFO[Player.Icon]</texture>
+		</control>
+		<control type="image">
+			<left>-79.2%</left>
+			<bottom>10%</bottom>
+			<height>200</height>
+			<aspectratio aligny="center">keep</aspectratio>
+			<texture fallback="DefaultTVShows.png">$INFO[PVR.EpgEventIcon]</texture>
+			<visible>!String.IsEmpty(PVR.EpgEventIcon)</visible>
+		</control>
+<!--now prog-->			
+		<control type="label">  
+			<left>25%</left>
+			<top>76%</top>
+			<right>25%</right>
+			<height>25</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<label>[COLOR button_focus]Now:[/COLOR] $INFO[Player.Title]</label>
+			<visible>VideoPlayer.HasEpg + !RDS.HasRadioText</visible>
+		</control>
+<!--next prog-->			
+		<control type="label">  
+			<left>20%</left>
+			<top>87.5%</top>
+			<right>20%</right>
+			<height>25</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<label>$VAR[OSDNextLabelVar]</label>
+			<visible>VideoPlayer.HasEpg + !RDS.HasRadioText</visible>
+		</control>
+		<control type="label">
+			<left>240</left>
+			<top>80%</top>
+			<height>25</height>
+			<label>[COLOR grey]$LOCALIZE[14304]: [/COLOR]$INFO[RDS.GetLine(0)]</label>
+			<visible>RDS.HasRadioText</visible>
+		</control>
+	</control>
+<!--INFO-->	
+		<control type="group">
+			<height>11.5%</height>
+			<bottom>4</bottom>
+			<left>4</left>
+			<right>4</right>
+			<visible>Player.ShowInfo | Window.IsActive(fullscreeninfo) | ![Window.IsVisible(playerprocessinfo) | Window.IsActive(musicosd) | Window.IsActive(visualisation) | Player.Seeking | Player.HasPerformedSeek(3) | Player.Forwarding | Player.Rewinding | Player.Paused]</visible>
+			<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] + !VideoPlayer.Content(LiveTV) + Window.IsActive(fullscreenvideo)</visible>
+			<include>DA</include>
+			<include>backbox</include>
+			<control type="textbox">
+				<top>5</top>
+				<bottom>5</bottom>
+				<left>10</left>
+				<right>10</right>
+				<label fallback="10005">$INFO[VideoPlayer.Plot]</label>
+				<align>center</align>
+				<aligny>center</aligny>
+				<autoscroll delay="6000" repeat="10000" time="6000"></autoscroll>
+			</control>
+		</control>	
+	</controls>
+</window>

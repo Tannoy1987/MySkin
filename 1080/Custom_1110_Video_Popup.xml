@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog" id="1110">
+    <defaultcontrol always="true">9001</defaultcontrol>
+    
+    <!-- NATIVE KODI AUTO-CLOSE TIMER LOOP -->
+    <timer>
+        <name>dv_popup_autoclose</name>
+        <start>Window.IsActive(1110)</start>
+        <stop>Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(dv_popup_autoclose), 5)</stop>
+        <onstop>Dialog.Close(1110,true)</onstop>
+    </timer>
+
+    <controls>
+        <!-- Invisible fallback button to anchor focus requirements cleanly -->
+        <control type="button" id="9001">
+            <presence>false</presence>
+        </control>
+
+        <control type="group" id="2">
+            <animation effect="fade" delay="300" time="200">Visible</animation>
+            <animation effect="fade" delay="200" time="150">Hidden</animation>
+            <centerleft>75%</centerleft>
+            <width>110</width>
+            <top>0</top>
+            <height>138</height>
+            
+            <control type="image" id="2">
+                <right>30</right>
+                <top>0</top>
+                <width>192</width>
+                <height>138</height>
+                <aspectratio>keep</aspectratio>
+                <align>right</align>
+                <texture>info/dolby.vision.horizontal.small.png</texture>
+            </control>
+            
+            <control type="label" id="2">
+                <description>DV Format</description>
+                <label>FEL</label>
+                <centerleft>50%</centerleft>
+                <centertop>50%</centertop>
+                <width>200</width>
+                <height>138</height>
+                <aligny>center</aligny>
+                <align>right</align>
+                <font>font13</font>
+                <textcolor>button_focus</textcolor>
+            </control>
+        </control>
+    </controls>
+</window>

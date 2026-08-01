@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="utf-8"?>
+<includes>
+
+	<!-- MPAA UK Icons -->
+    <include name="MPAA_Details_RowNew">
+	<include>DA</include>
+	<!-- Icon display -->
+		<control type="image">
+	<visible>!String.IsEmpty(ListItem.Mpaa)</visible>
+			<top>7</top>
+			<width>35</width>
+			<height>35</height>
+            <aspectratio>keep</aspectratio>
+			<texture>$VAR[mediaflags_large_rating_UK_icons]</texture>
+			<include>DA</include>
+        </control>
+    </include>
+	<variable name="mediaflags_text">
+		<value condition="String.Contains(ListItem.Mpaa,UK:U) | String.Contains(ListItem.Mpaa,GB-U) | String.Contains(ListItem.Mpaa,Rated U) | String.IsEqual(ListItem.Mpaa,U) | String.Contains(ListItem.Mpaa,UK:U) | String.Contains(ListItem.Mpaa,GB-U) | String.Contains(ListItem.Mpaa,Rated U) | String.IsEqual(ListItem.Mpaa,U)">Rated-U</value>
+		<value condition="String.Contains(ListItem.Mpaa,UK:PG) | String.Contains(ListItem.Mpaa,GB-PG) | String.Contains(ListItem.Mpaa,Guidance) | String.Contains(ListItem.Mpaa,UK:PG) | String.Contains(ListItem.Mpaa,GB-PG) | String.Contains(ListItem.Mpaa,Guidance)">Rated-PG</value>
+		<value condition="String.Contains(ListItem.Mpaa,UK:12A) | String.Contains(ListItem.Mpaa,GB-12A) | String.Contains(ListItem.Mpaa,Rated 12A) | String.IsEqual(ListItem.Mpaa,12A) | String.Contains(ListItem.Mpaa,UK:12A) | String.Contains(ListItem.Mpaa,GB-12A) | String.Contains(ListItem.Mpaa,Rated 12A) | String.IsEqual(ListItem.Mpaa,12A)">Rated-12A</value>
+		<value condition="String.IsEqual(ListItem.Mpaa,UK:12) | String.IsEqual(ListItem.Mpaa,GB-12) | String.IsEqual(ListItem.Mpaa,Rated 12) | String.IsEqual(ListItem.Mpaa,12) | String.IsEqual(ListItem.Mpaa,UK:12) | String.IsEqual(ListItem.Mpaa,GB-12) | String.IsEqual(ListItem.Mpaa,Rated 12) | String.IsEqual(ListItem.Mpaa,12)">Rated-12</value>
+		<value condition="String.Contains(ListItem.Mpaa,UK:15) | String.Contains(ListItem.Mpaa,GB-15) | String.Contains(ListItem.Mpaa,Rated 15) | String.IsEqual(ListItem.Mpaa,15) | String.Contains(ListItem.Mpaa,Mature) | String.Contains(ListItem.Mpaa,UK:15) | String.Contains(ListItem.Mpaa,GB-15) | String.Contains(ListItem.Mpaa,Rated 15) | String.IsEqual(ListItem.Mpaa,15) | String.Contains(ListItem.Mpaa,Mature)">Rated-15</value>
+		<value condition="String.Contains(ListItem.Mpaa,UK:18) | String.Contains(ListItem.Mpaa,GB-18) | String.Contains(ListItem.Mpaa,Rated 18) | String.IsEqual(ListItem.Mpaa,18) | String.Contains(ListItem.Mpaa,UK:18) | String.Contains(ListItem.Mpaa,GB-18) | String.Contains(ListItem.Mpaa,Rated 18) | String.IsEqual(ListItem.Mpaa,18)">Rated-18</value>
+		<!--UK translation of US TV ratings-->
+		<value condition="String.IsEqual(ListItem.Mpaa,TV-Y) | String.Contains(ListItem.Mpaa,TV-Y7) | String.Contains(ListItem.Mpaa,TV-G) | String.IsEqual(ListItem.Mpaa,TV-Y) | String.Contains(ListItem.Mpaa,TV-Y7) | String.Contains(ListItem.Mpaa,TV-G)">TV-G</value>
+		<value condition="String.Contains(ListItem.Mpaa,TV-PG) | String.Contains(ListItem.Mpaa,TV-PG)">TV-PG</value>
+		<value condition="String.Contains(ListItem.Mpaa,TV-14) | String.Contains(ListItem.Mpaa,TV-14)">TV-14</value>
+		<value condition="String.Contains(ListItem.Mpaa,TV-MA) | String.Contains(ListItem.Mpaa,TV-MA) | String.Contains(ListItem.Mpaa,USA:TV-MA)">TV-MA</value>		
+		<!--UK translation of US MPAA so US can also use UK icons if setting is enabled-->
+		<value condition="String.Contains(ListItem.Mpaa,US:G) | String.Contains(ListItem.Mpaa,USA:G) | String.Contains(ListItem.Mpaa,Rated G) | String.IsEqual(ListItem.Mpaa,G) | String.Contains(ListItem.Mpaa,US:G) | String.Contains(ListItem.Mpaa,USA:G) | String.Contains(ListItem.Mpaa,Rated G) | String.IsEqual(ListItem.Mpaa,G)">Rated-G</value>
+		<value condition="String.Contains(ListItem.Mpaa,PG-13) | String.Contains(ListItem.Mpaa,PG-13)">PG-13</value>
+		<value condition="String.IsEqual(ListItem.Mpaa,US:PG) | String.IsEqual(ListItem.Mpaa,USA:PG) | String.IsEqual(ListItem.Mpaa,Rated PG) | String.IsEqual(ListItem.Mpaa,PG) | String.IsEqual(ListItem.Mpaa,US:PG) | String.IsEqual(ListItem.Mpaa,USA:PG) | String.IsEqual(ListItem.Mpaa,Rated PG) | String.IsEqual(ListItem.Mpaa,PG)">Rated-PG</value> 
+		<value condition="String.Contains(ListItem.Mpaa,US:R) | String.Contains(ListItem.Mpaa,USA:R) | String.Contains(ListItem.Mpaa,Rated R) | String.IsEqual(ListItem.Mpaa,R) | String.Contains(ListItem.Mpaa,US:R) | String.Contains(ListItem.Mpaa,USA:R) | String.Contains(ListItem.Mpaa,Rated R) | String.IsEqual(ListItem.Mpaa,R)">Rated-R</value>
+		<value condition="String.Contains(ListItem.Mpaa,NC-17) | String.Contains(ListItem.Mpaa,NC-17)">NC-17</value>
+		<value>Unrated</value>
+	</variable>
+
+	
+<!--details row MPAA UK & UK style US icons-->
+	<variable name="mediaflags_large_rating_UK_icons">	
+<!--UK classifcations using UK or Rated prefix-->
+		<value condition="String.Contains(ListItem.Mpaa,UK:U) | String.Contains(ListItem.Mpaa,GB-U) | String.Contains(ListItem.Mpaa,Rated U) | String.IsEqual(ListItem.Mpaa,U) | String.Contains(ListItem.Mpaa,UK:U) | String.Contains(ListItem.Mpaa,GB-U) | String.Contains(ListItem.Mpaa,Rated U) | String.IsEqual(ListItem.Mpaa,U)">flags/flags_color/mpaa/bbfc_u_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,UK:PG) | String.Contains(ListItem.Mpaa,GB-PG) | String.Contains(ListItem.Mpaa,Guidance) | String.Contains(ListItem.Mpaa,UK:PG) | String.Contains(ListItem.Mpaa,GB-PG) | String.Contains(ListItem.Mpaa,Guidance)">flags/flags_color/mpaa/bbfc_pg_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,UK:12A) | String.Contains(ListItem.Mpaa,GB-12A) | String.Contains(ListItem.Mpaa,Rated 12A) | String.IsEqual(ListItem.Mpaa,12A) | String.Contains(ListItem.Mpaa,UK:12A) | String.Contains(ListItem.Mpaa,GB-12A) | String.Contains(ListItem.Mpaa,Rated 12A) | String.IsEqual(ListItem.Mpaa,12A)">flags/flags_color/mpaa/bbfc_12a_certificate_uk.png</value>
+
+		<value condition="String.IsEqual(ListItem.Mpaa,UK:12) | String.IsEqual(ListItem.Mpaa,GB-12) | String.IsEqual(ListItem.Mpaa,Rated 12) | String.IsEqual(ListItem.Mpaa,12) | String.IsEqual(ListItem.Mpaa,UK:12) | String.IsEqual(ListItem.Mpaa,GB-12) | String.IsEqual(ListItem.Mpaa,Rated 12) | String.IsEqual(ListItem.Mpaa,12)">flags/flags_color/mpaa/bbfc_12_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,UK:15) | String.Contains(ListItem.Mpaa,GB-15) | String.Contains(ListItem.Mpaa,Rated 15) | String.IsEqual(ListItem.Mpaa,15) | String.Contains(ListItem.Mpaa,Mature) | String.Contains(ListItem.Mpaa,UK:15) | String.Contains(ListItem.Mpaa,GB-15) | String.Contains(ListItem.Mpaa,Rated 15) | String.IsEqual(ListItem.Mpaa,15) | String.Contains(ListItem.Mpaa,Mature)">flags/flags_color/mpaa/bbfc_15_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,UK:18) | String.Contains(ListItem.Mpaa,GB-18) | String.Contains(ListItem.Mpaa,Rated 18) | String.IsEqual(ListItem.Mpaa,18) | String.Contains(ListItem.Mpaa,UK:18) | String.Contains(ListItem.Mpaa,GB-18) | String.Contains(ListItem.Mpaa,Rated 18) | String.IsEqual(ListItem.Mpaa,18)">flags/flags_color/mpaa/bbfc_18_certificate_uk.png</value>
+		
+
+
+
+
+
+
+
+
+		<!--UK translation of US TV ratings-->
+
+
+		<value condition="String.IsEqual(ListItem.Mpaa,TV-Y) | String.Contains(ListItem.Mpaa,TV-Y7) | String.Contains(ListItem.Mpaa,TV-G) | String.IsEqual(ListItem.Mpaa,TV-Y) | String.Contains(ListItem.Mpaa,TV-Y7) | String.Contains(ListItem.Mpaa,TV-G)">flags/flags_color/mpaa/bbfc_u_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,TV-PG) | String.Contains(ListItem.Mpaa,TV-PG)">flags/flags_color/mpaa/bbfc_pg_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,TV-14) | String.Contains(ListItem.Mpaa,TV-14)">flags/flags_color/mpaa/bbfc_15_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,TV-MA) | String.Contains(ListItem.Mpaa,TV-MA) | String.Contains(ListItem.Mpaa,USA:TV-MA)">flags/flags_color/mpaa/bbfc_18_certificate_uk.png</value>		
+		
+		<!--UK translation of US MPAA so US can also use UK icons if setting is enabled-->
+		<value condition="String.Contains(ListItem.Mpaa,US:G) | String.Contains(ListItem.Mpaa,USA:G) | String.Contains(ListItem.Mpaa,Rated G) | String.IsEqual(ListItem.Mpaa,G) | String.Contains(ListItem.Mpaa,US:G) | String.Contains(ListItem.Mpaa,USA:G) | String.Contains(ListItem.Mpaa,Rated G) | String.IsEqual(ListItem.Mpaa,G)">flags/flags_color/mpaa/bbfc_u_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,PG-13) | String.Contains(ListItem.Mpaa,PG-13)">flags/flags_color/mpaa/bbfc_12a_certificate_uk.png</value>
+
+		<value condition="String.IsEqual(ListItem.Mpaa,US:PG) | String.IsEqual(ListItem.Mpaa,USA:PG) | String.IsEqual(ListItem.Mpaa,Rated PG) | String.IsEqual(ListItem.Mpaa,PG) | String.IsEqual(ListItem.Mpaa,US:PG) | String.IsEqual(ListItem.Mpaa,USA:PG) | String.IsEqual(ListItem.Mpaa,Rated PG) | String.IsEqual(ListItem.Mpaa,PG)">flags/flags_color/mpaa/bbfc_pg_certificate_uk.png</value> 
+
+		<value condition="String.Contains(ListItem.Mpaa,US:R) | String.Contains(ListItem.Mpaa,USA:R) | String.Contains(ListItem.Mpaa,Rated R) | String.IsEqual(ListItem.Mpaa,R) | String.Contains(ListItem.Mpaa,US:R) | String.Contains(ListItem.Mpaa,USA:R) | String.Contains(ListItem.Mpaa,Rated R) | String.IsEqual(ListItem.Mpaa,R)">flags/flags_color/mpaa/bbfc_18_certificate_uk.png</value>
+
+		<value condition="String.Contains(ListItem.Mpaa,NC-17) | String.Contains(ListItem.Mpaa,NC-17)">flags/flags_color/mpaa/bbfc_18_certificate_uk.png</value>
+		
+		<value condition="String.Contains(ListItem.Mpaa,NR) | String.Contains(ListItem.Mpaa,NR) | String.Contains(ListItem.Mpaa,Not) | String.Contains(ListItem.Mpaa,Unrated) | String.Contains(ListItem.Mpaa,Passed) | String.Contains(ListItem.Mpaa,Approved)">flags/flags_color/mpaa/bbfc_nr_certificate_uk.png</value>
+		
+	</variable>	
+
+
+	
+
+	
+		
+
+
+
+
+
+
+
+
+    <include name="mediaflags">
+
+
+        <include condition="Window.IsActive(fullscreenvideo)">mediaflags_large_osd</include>
+
+        
+
+        <include condition="!Window.IsActive(fullscreenvideo)">mediaflags_large</include>
+    </include>
+    
+    <include name="mediaflags_large_layout">
+		
+		<width>112</width>
+		<height>80</height>
+		<aspectratio align="center" aligny="center">keep</aspectratio>
+
+		<animation effect="fade" time="200">VisibleChange</animation>
+	</include>
+    
+
+    
+    <include name="mediaflags_large">
+        <include condition="!Window.IsActive(Home)">mediaflags_large_normal</include>
+    </include>
+    
+	<variable name="VideoResolutionVar">
+		<value condition="String.IsEqual(ListItem.VideoResolution,480)">480</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,540)">540</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,576)">576</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,720)">720</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,1080)">1080</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,4K)">4k</value>
+		<value condition="String.IsEqual(ListItem.VideoResolution,8K)">8k</value>
+		<value>$INFO[ListItem.VideoResolution]</value>
+	</variable>
+
+	<!-- MPAA/Resolution/AudioChannels - Bottom Footer -->
+    <include name="mediaflags_large_normal">
+		 <control type="group">
+			 <top>93.25%</top>
+            <left>0</left>
+		 <control type="image">
+					<right>0</right>
+					<top>6</top>
+					<left>0</left>
+					<height>70</height>
+					<texture border="5">boxes/inner.png</texture>
+      <visible>!String.IsEmpty(ListItem.VideoResolution) | !String.IsEmpty(ListItem.AudioCodec) | !String.IsEmpty(ListItem.AudioChannels) | !String.IsEmpty(ListItem.VideoAspect)</visible>
+
+				</control>
+        <control type="grouplist">
+				<align>center</align>
+       <left>35</left>
+			<orientation>horizontal</orientation>
+
+			<control type="image">
+			    <width>82</width>
+                <include>mediaflags_large_layout</include>
+                <texture background="true">flags/flags_color$VAR[VideoResolutionVar,/resolution/,.png]</texture>
+                <visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
+		
+            </control>
+            <control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">flags/flags_color$VAR[mediaflags_large_source_audio,/audio/,.png]</texture>
+              <visible>!String.IsEmpty(ListItem.AudioCodec)</visible>
+            </control>
+            <control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">flags/flags_color$INFO[ListItem.AudioChannels,/channels/,.png]</texture>
+                <visible>!String.IsEmpty(ListItem.AudioChannels)</visible>
+            </control>
+            <control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">flags/flags_color$VAR[mediaflags_large_source,/video/,.png]</texture>
+                <visible>!String.IsEmpty(ListItem.VideoCodec) + ![String.IsEqual(Listitem.HdrType,hdr10) | String.IsEqual(Listitem.HdrType,dolbyvision) | String.IsEqual(Listitem.HdrType,hlg)]</visible>
+            </control>
+			<control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">flags/flags_color$INFO[Listitem.HdrType,/video/,.png]</texture>
+                <visible>[String.IsEqual(Listitem.HdrType,hdr10) | String.IsEqual(Listitem.HdrType,dolbyvision) | String.IsEqual(Listitem.HdrType,hlg)]</visible>
+            </control>
+            <control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">flags/flags_color$INFO[ListItem.VideoAspect,/aspectratio/,.png]</texture>
+                <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
+            </control>
+	</control>
+        </control>
+    </include>
+    
+    <variable name="mediaflags_large_path">
+        <value condition="Window.IsActive(fullscreenvideo)">flags/flags_color</value>
+        <value condition="!Window.IsActive(fullscreenvideo)">flags/flags_color</value>
+        <value>flags/flags_large</value>
+    </variable>
+    
+    <include name="mediaflags_large_osd">
+        <control type="grouplist">
+            <posy>-17</posy>
+            <posx>12</posx>
+			<orientation>horizontal</orientation>
+            <control type="image">
+			    <width>86</width>
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[mediaflags_large_path]$INFO[VideoPlayer.VideoResolution,/resolution/,.png]</texture>
+                <visible>!String.IsEmpty(VideoPlayer.VideoResolution)</visible>
+
+            </control>
+			<control type="image">
+			    <width>82</width>
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[mediaflags_large_path]$INFO[VideoPlayer.VideoResolution,/resolution/,.png]</texture>
+                <visible>!String.IsEmpty(VideoPlayer.VideoResolution)</visible>
+				<visible>Skin.String(osdmediaflagsstyle,large) + !Skin.String(osdmediaflagsstyle,large_color)</visible>
+            </control>
+            <control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[mediaflags_large_path]$INFO[VideoPlayer.AudioCodec,/audio/,.png]</texture>
+                <visible>!String.IsEmpty(VideoPlayer.AudioCodec)</visible>
+            </control>
+            <control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[mediaflags_large_path]$INFO[VideoPlayer.AudioChannels,/channels/,.png]</texture>
+                <visible>!String.IsEmpty(VideoPlayer.AudioChannels)</visible>
+            </control>
+            <control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[mediaflags_large_path]$INFO[VideoPlayer.VideoCodec,/video/,.png]</texture>
+                <visible>!String.IsEmpty(VideoPlayer.VideoCodec) + ![String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.IsEqual(VideoPlayer.HdrType,hlg)]</visible>
+            </control>
+			<control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[mediaflags_large_path]$INFO[VideoPlayer.HdrType,/video/,.png]</texture>
+                <visible>[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.IsEqual(VideoPlayer.HdrType,hlg)]</visible>
+            </control>
+            <control type="image">
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[mediaflags_large_path]$INFO[VideoPlayer.VideoAspect,/aspectratio/,.png]</texture>
+                <visible>!String.IsEmpty(VideoPlayer.VideoAspect)</visible>
+            </control>
+			<control type="image">
+			    <width>-7</width>
+				<height>80</height>
+				<aspectratio align="center" aligny="center">keep</aspectratio>
+				<animation effect="fade" time="200">VisibleChange</animation>
+				<visible>!String.IsEmpty(VideoPlayer.VideoAspect)</visible>
+            </control>
+            <control type="group">
+                <include>MPAA_Details_RowUS_Footer_Color_osd</include>
+				<visible>Skin.String(osdmediaflagsstyle,large_color) + [String.IsEqual(Skin.String(mpaa_style),color_mpaa) | String.IsEqual(Skin.String(mpaa_style),default)]</visible>
+			</control>
+			<control type="group">
+                <include>MPAA_Details_RowUS_Footer_Color_Fixed_Size_osd</include>
+				<visible>Skin.String(osdmediaflagsstyle,large_color) + String.IsEqual(Skin.String(mpaa_style),color_fixed_mpaa)</visible>
+			</control>
+			<control type="group">
+                <include>MPAA_Details_RowNew_OSD</include>
+				<visible>Skin.String(osdmediaflagsstyle,large_color) + String.IsEqual(Skin.String(mpaa_style),uk_mpaa)</visible>
+			</control>
+			<control type="group">
+                <include>MPAA_Details_RowUS_Footer_White_osd</include>
+				<visible>!Skin.String(osdmediaflagsstyle,large_color)</visible>
+			</control>
+        </control>
+    </include>
+    
+    <variable name="mediaflags_large_source_audio">
+		     <value condition="!String.Contains(ListItem.Title,atmos) + String.Contains(ListItem.Filenameandpath,atmos)">atmos</value>
+        <value condition="!String.Contains(ListItem.Title,dts-x) + String.Contains(ListItem.Filenameandpath,dts-x) | !String.Contains(ListItem.Title,dtsx) + String.Contains(ListItem.Filenameandpath,dtsx)">dts_x</value>
+
+		<value condition="String.Contains(ListItem.AudioCodec,ac3)">ac3</value>
+		<value condition="String.Contains(ListItem.AudioCodec,truehd)">dolbytruehd</value>
+		<value condition="String.Contains(ListItem.AudioCodec,atmos)">atmos</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtsx)">dts_x</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dca)">dca</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dts)">dts</value>
+		<value condition="String.Contains(ListItem.AudioCodec,dts-hd)">dtsma</value>
+		<value condition="String.Contains(ListItem.AudioCodec,dtshd)">dtsma</value>
+		<value condition="String.Contains(ListItem.AudioCodec,pcm)">pcm</value>
+		<value condition="String.Contains(ListItem.AudioCodec,aac)">aac</value>
+        <value condition="!String.IsEmpty(ListItem.AudioCodec)">$INFO[ListItem.AudioCodec]</value>
+		
+		<value condition="Window.IsActive(visualisation) + !String.IsEmpty(MusicPlayer.Codec)">$INFO[MusicPlayer.Codec]</value>
+		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,ac3)">DOLBY</value>
+		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,dca)">DTS</value>
+		<value condition="Window.IsActive(fullscreenvideo) + String.Contains(VideoPlayer.AudioCodec,dts-hd)">DTS HD</value>
+		<value condition="Window.IsActive(fullscreenvideo) + String.Contains(VideoPlayer.AudioCodec,dtshd)">DTS HD</value>
+		<value condition="Window.IsActive(fullscreenvideo) + String.Contains(VideoPlayer.AudioCodec,pcm)">PCM</value>
+		<value condition="Window.IsActive(fullscreenvideo) + !String.IsEmpty(VideoPlayer.AudioCodec)">$INFO[VideoPlayer.AudioCodec]</value>
+		
+		<value condition="String.IsEqual(Window(Home).Property(ListItem.AudioCodec),ac3)">ac3</value>
+		<value condition="String.IsEqual(Window(Home).Property(ListItem.AudioCodec),dca)">dca</value>
+		<value condition="String.Contains(Window(Home).Property(ListItem.AudioCodec),dts-hd)">dtsma</value>
+		<value condition="String.Contains(Window(Home).Property(ListItem.AudioCodec),dtshd)">dtsma</value>
+		<value condition="String.Contains(Window(Home).Property(ListItem.AudioCodec),pcm)">pcm</value>
+		<value condition="String.Contains(Window(Home).Property(ListItem.AudioCodec),atmos)">atmos</value>
+        <value condition="String.Contains(Window(Home).Property(ListItem.AudioCodec),dtsx)">dtsx</value>
+		<value condition="!String.IsEmpty(Window(Home).Property(ListItem.AudioCodec))">$INFO[Window(Home).Property(ListItem.AudioCodec)]</value>
+	</variable>
+    <variable name="mediaflags_large_source">
+		<value condition="[String.Contains(ListItem.filename,PDTV) | String.Contains(ListItem.filename,sdtv) | String.Contains(ListItem.filename,sd tv)]">sdtv</value>
+		<value condition="[String.Contains(ListItem.Filename,hdtv) | String.Contains(ListItem.Filename,HDTV) | String.Contains(ListItem.Filename,hd tv)]">hdtv</value>
+		<value condition="[String.Contains(ListItem.Filename,hddvd) | String.Contains(ListItem.Filename,HDDVD) | String.Contains(ListItem.Filename,hd-dvd)]">hddvd</value>
+		<value condition="ListItem.IsStereoscopic">bluray3d</value>
+		<value condition="[String.Contains(ListItem.Filename,bluray) | String.Contains(ListItem.Filename,blu-ray) | String.Contains(ListItem.Filename,bdrip) | String.Contains(ListItem.Filename,brrip)]">bluray</value>
+		<value condition="String.Contains(ListItem.Filename,dvb)">dvb</value>
+		<value condition="String.Contains(ListItem.Filename,web-dl) | String.Contains(ListItem.Filename,webdl)">web-dl</value>
+		<value condition="String.Contains(ListItem.Filename,dvd) | String.IsEqual(ListItem.FileExtension,iso) | String.IsEqual(ListItem.FileExtension,ifo)">dvd</value>
+		<value condition="!String.IsEmpty(ListItem.VideoCodec)">$INFO[ListItem.VideoCodec]</value>
+       
+        <value condition="[String.Contains(Player.FileNameAndPath,PDTV) | String.Contains(Player.FileNameAndPath,sdtv)]">sdtv</value>
+		<value condition="String.Contains(Player.FileNameAndPath,hdtv)">hdtv</value>
+		<value condition="[String.Contains(Player.FileNameAndPath,hddvd) | String.Contains(Player.FileNameAndPath,hd-dvd)]">hddvd</value>
+		<value condition="VideoPlayer.IsStereoscopic">bluray3d</value>
+		<value condition="[String.Contains(Player.FileNameAndPath,bluray) | String.Contains(Player.FileNameAndPath,blu-ray) | String.Contains(Player.FileNameAndPath,bdrip) | String.Contains(Player.FileNameAndPath,brrip)]">bluray</value>
+		<value condition="String.Contains(Player.FileNameAndPath,dvb)">dvb</value>
+		<value condition="String.Contains(Player.FileNameAndPath,web-dl) | String.Contains(Player.Filename,webdl)">web-dl</value>
+		<value condition="String.EndsWith(Player.FileNameAndPath,dvd) | String.EmdsWith(Player.FileNameAndPath,.iso) | String.Contains(Player.FileNameAndPath,.ifo)">dvd</value>
+		<value>$INFO[VideoPlayer.VideoCodec]</value>
+	</variable>
+
+
+    <variable name="mediaflags_large_source_aspect">
+		<value condition="String.Contains(ListItem.VideoAspect,1.33)">4:3</value>
+		<value condition="String.Contains(ListItem.VideoAspect,1.37)">4:3</value>
+		<value condition="String.Contains(ListItem.VideoAspect,1.66)">15:9</value>
+		<value condition="String.Contains(ListItem.VideoAspect,1.78)">16:9</value>
+		<value condition="String.Contains(ListItem.VideoAspect,1:85)">16:9</value>
+		<value condition="String.Contains(ListItem.VideoAspect,2:20)">22:10</value>
+		<value condition="String.Contains(ListItem.VideoAspect,2:35)">21:9</value>
+		<value condition="String.Contains(ListItem.VideoAspect,2:40)">21:9</value>
+		<value condition="String.Contains(ListItem.VideoAspect,2:55)">23:9</value>
+		<value condition="String.Contains(ListItem.VideoAspect,2:76)">11:4</value>
+
+
+
+	
+		
+	
+	</variable>
+
+
+    <variable name="mediaflags_large_source">
+		<value condition="[String.Contains(ListItem.filename,PDTV) | String.Contains(ListItem.filename,sdtv) | String.Contains(ListItem.filename,sd tv)]">sdtv</value>
+		<value condition="[String.Contains(ListItem.Filename,hdtv) | String.Contains(ListItem.Filename,HDTV) | String.Contains(ListItem.Filename,hd tv)]">hdtv</value>
+		<value condition="[String.Contains(ListItem.Filename,hddvd) | String.Contains(ListItem.Filename,HDDVD) | String.Contains(ListItem.Filename,hd-dvd)]">hddvd</value>
+		<value condition="ListItem.IsStereoscopic">bluray3d</value>
+		<value condition="[String.Contains(ListItem.Filename,bluray) | String.Contains(ListItem.Filename,blu-ray) | String.Contains(ListItem.Filename,bdrip) | String.Contains(ListItem.Filename,brrip)]">bluray</value>
+		<value condition="String.Contains(ListItem.Filename,dvb)">dvb</value>
+		<value condition="String.Contains(ListItem.Filename,web-dl) | String.Contains(ListItem.Filename,webdl)">web-dl</value>
+		<value condition="String.Contains(ListItem.Filename,dvd) | String.IsEqual(ListItem.FileExtension,iso) | String.IsEqual(ListItem.FileExtension,ifo)">dvd</value>
+		<value condition="!String.IsEmpty(ListItem.VideoCodec)">$INFO[ListItem.VideoCodec]</value>
+       
+        <value condition="[String.Contains(Player.FileNameAndPath,PDTV) | String.Contains(Player.FileNameAndPath,sdtv)]">sdtv</value>
+		<value condition="String.Contains(Player.FileNameAndPath,hdtv)">hdtv</value>
+		<value condition="[String.Contains(Player.FileNameAndPath,hddvd) | String.Contains(Player.FileNameAndPath,hd-dvd)]">hddvd</value>
+		<value condition="VideoPlayer.IsStereoscopic">bluray3d</value>
+		<value condition="[String.Contains(Player.FileNameAndPath,bluray) | String.Contains(Player.FileNameAndPath,blu-ray) | String.Contains(Player.FileNameAndPath,bdrip) | String.Contains(Player.FileNameAndPath,brrip)]">bluray</value>
+		<value condition="String.Contains(Player.FileNameAndPath,dvb)">dvb</value>
+		<value condition="String.Contains(Player.FileNameAndPath,web-dl) | String.Contains(Player.Filename,webdl)">web-dl</value>
+		<value condition="String.EndsWith(Player.FileNameAndPath,dvd) | String.EmdsWith(Player.FileNameAndPath,.iso) | String.Contains(Player.FileNameAndPath,.ifo)">dvd</value>
+		<value>$INFO[VideoPlayer.VideoCodec]</value>
+	</variable>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	<!-- Audio Extension -->
+	<include name="AudioFileExtension">
+		<include>Default_Visible_Fade</include>			
+		<!-- Fallback Audio Codec flag/text -->		
+		<control type="button" id="542271">
+<visible>!String.IsEmpty(ListItem.FileExtension)</visible>
+				<posy>70</posy>
+                <height>36</height>
+                <width>auto</width>
+				<align>center</align>
+				<aligny>top</aligny>
+				<textwidth>140</textwidth> 
+				<textcolor>white</textcolor>
+				<disabledcolor>white</disabledcolor>
+				<texturenofocus border="10">boxes/square-rounded2.png</texturenofocus>
+				<texturefocus  border="10">boxes/square-rounded2.png</texturefocus>
+				<textoffsetx>8</textoffsetx>
+				<textoffsety>2</textoffsety>
+				<font>Reg24</font>
+				<label>$INFO[ListItem.FileExtension,[UPPERCASE][B],[/B][/UPPERCASE]]</label>
+				<enable>false</enable>
+            </control>
+	</include>
+	
+	<!-- Audio BitRate -->
+	<include name="AudioBitRate">
+		<include>DA</include>		
+		<!-- Fallback Audio Codec flag/text -->		
+		<control type="button" id="542272">
+	<visible>!String.IsEmpty(ListItem.BitRate)</visible>
+				<posy>7</posy>
+                <height>36</height>
+                <width>auto</width>
+				<align>center</align>
+				<aligny>top</aligny>
+				<textwidth>140</textwidth> 
+				<textcolor>white</textcolor>
+				<disabledcolor>white</disabledcolor>
+				<texturenofocus border="10">boxes/square-rounded2.png</texturenofocus>
+				<texturefocus border="10">boxes/square-rounded2.png</texturefocus>
+				<textoffsetx>8</textoffsetx>
+				<textoffsety>2</textoffsety>
+				<font>Reg24</font>
+				<label>$INFO[ListItem.BitRate,[UPPERCASE][B],[/B][/UPPERCASE]]</label>
+				<enable>false</enable>
+            </control>
+	</include>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<include name="Audiocodec">
+	 <control type="group">
+		<include>Default_Visible_Fade</include>
+		<posy>7</posy>
+		<height>37</height>
+		<width>159</width>					
+		<!-- Fallback Audio Codec flag/text -->		
+		<control type="button">
+			<visible>!String.IsEmpty(ListItem.AudioCodec)</visible>
+	
+            <height>36</height>
+            <width>auto</width>
+			<align>center</align>
+			<aligny>center</aligny>
+			<textwidth>140</textwidth> 
+			<textcolor>white</textcolor>
+			<disabledcolor>red</disabledcolor>
+                <texture background="true">$VAR[mediaflags_large_path]$INFO[ListItem.AudioCodec,/audio/,.png]</texture>
+			<texturefocus></texturefocus>
+			<textoffsetx>8</textoffsetx>
+			<textoffsety>2</textoffsety>
+			<font>Reg24</font>
+			<label>$VAR[AudioCodecVar,[UPPERCASE][B],[/B][/UPPERCASE]]</label>
+		
+        </control>
+	</control>
+</include>
+
+
+	<include name="MediaFlag">
+		<param name="texture">colors/white.png</param>
+		<param name="flag_visible">true</param>
+		<definition>
+			<control type="button">
+				<width>auto</width>
+				<height>33</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>font_flag</font>
+				<textcolor>button_focus</textcolor>
+				<label>$PARAM[flag_label]</label>
+				<texturefocus border="0" infill="false" colordiffuse="white">$PARAM[texture]</texturefocus>
+				<texturenofocus border="0" infill="false" colordiffuse="white">$PARAM[texture]</texturenofocus>
+				<visible>$PARAM[flag_visible]</visible>
+			</control>
+		</definition>
+	</include>
+		<include name="MediaFlags">
+		<param name="visible">true</param>
+		<definition>
+				    <control type="group">
+	        <bottom>0</bottom>
+	        <left>10</left>
+	        <width>604</width>
+	        <height>40</height>
+
+<control type="grouplist">
+				<visible>!String.IsEqual(ListItem.DbType,musicvideo) + [Window.IsActive(musicplaylist) | Container.Content(albums) | Window.IsActive(music)]</visible>
+								<visible>![Control.HasFocus(87) | Control.HasFocus(70038) | Control.HasFocus(70039) | Control.HasFocus(70052) |
+                        Control.HasFocus(70053) | Control.HasFocus(70054) | Control.HasFocus(70055)
+                        | Control.HasFocus(70048) | Control.HasFocus(31066)]</visible>
+				<orientation>horizontal</orientation>
+				<left>-35</left>
+				<bottom>20</bottom>
+				<height>40</height>
+				<align>center</align>
+				<itemgap>-80</itemgap>
+				<width>604</width>
+				<usecontrolcoords>true</usecontrolcoords>
+
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.FileExtension)" />
+					<param name="flag_label" value="$INFO[ListItem.FileExtension]" />
+			
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.MusicChannels)" />
+					<param name="flag_label" value="$VAR[AudioChannelsVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.Samplerate)" />
+					<param name="flag_label" value="$INFO[ListItem.Samplerate, ,kHz]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.BitRate)" />
+					 <param name="flag_label" value="$INFO[ListItem.BitRate, ,kbps]" /> 
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.MusicBitsPerSample)" />
+					<param name="flag_label" value="$INFO[ListItem.MusicBitsPerSample, ,bit]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.BMP)" />
+					<param name="flag_label" value="$INFO[ListItem.BMP, ,bpm]" />
+				</include>
+			</control>
+						
+			
+			<control type="grouplist">
+				<visible>Player.ShowInfo + Window.IsActive(musicosd) + ![Player.ChannelPreviewActive | Window.IsActive(musicplaylist)]</visible>
+				<visible>![Control.HasFocus(87) | Control.HasFocus(70052) |
+                        Control.HasFocus(70053) | Control.HasFocus(70054) | Control.HasFocus(70055)
+                        | Control.HasFocus(70048) | Control.HasFocus(31066)]</visible>
+				<orientation>horizontal</orientation>
+				<left>-35</left>
+				<bottom>20</bottom>
+				<height>40</height>
+				<align>center</align>
+				<itemgap>-80</itemgap>
+				<width>604</width>
+				<usecontrolcoords>true</usecontrolcoords>
+				<!-- <include content="MediaFlag">
+					<param name="flag_visible" value="RDS.HasRDS" />
+					<param name="flag_label" value="RDS" />
+				</include> -->
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.Codec)" />
+					<param name="flag_label" value="$VAR[AudioCodecVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="$EXP[object_audio_true]" />
+					<param name="flag_label" value="$VAR[ObjectAudioTypeVar]" />
+				</include>
+				<!-- <include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.Channels)" />
+					<param name="flag_label" value="$VAR[AudioChannelsVar]" />
+				</include> -->
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.SampleRate)" />
+					<param name="flag_label" value="$INFO[MusicPlayer.SampleRate, ,kHz]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.BitRate)" />
+					 <param name="flag_label" value="$INFO[MusicPlayer.BitRate, ,kbps]" /> 
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.BitsPerSample)" />
+					<param name="flag_label" value="$INFO[MusicPlayer.BitsPerSample, ,bit]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.BMP)" />
+					<param name="flag_label" value="$INFO[MusicPlayer.BMP, ,bpm]" />
+				</include>
+			</control>
+			</control>
+			</definition>
+			</include>
+	
+
+
+
+
+
+
+
+
+</includes>
